@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - The Tech Wave</title>
+      {% else %}
+      <title>Welcome to The Tech Wave</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>The Tech Wave: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
