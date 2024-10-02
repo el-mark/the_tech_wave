@@ -5,11 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-7">
                 <article class="blog-post">
-                    <h2 class="display-5 mt-3" style="font-weight: 800; font-family: aktiv-grotesk, Helvetica Neue, Helvetica, Arial, sans-serif;">{{ post.title }}</h2>
+                    <h2 class="display-5" style="font-weight: 800; font-family: aktiv-grotesk, Helvetica Neue, Helvetica, Arial, sans-serif; margin-top: 1.5rem;">{{ post.title }}</h2>
                     <!-- <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p> -->
-                    <img src="{{ post.thumbnail }}" class="bd-placeholder-img card-img-top mb-4" width="100%" height="100%" alt="{{ post.title }}">
+                    <img src="{{ post.thumbnail }}" class="bd-placeholder-img card-img-top mb-4 mt-4" width="100%" height="100%" alt="{{ post.title }}">
+                    <p class="text-muted" style="font-size: 0.9rem;">{{ post.date }}</p>
         
-                    <p>{{ post.body }}</p>
+                    {{ post.body|safe }}
                     
                     <p><a href="{{ post.source }}" target="_blank">Fuente</a></p>
                 </article>
