@@ -1,4 +1,4 @@
-alembic @ file:///home/conda/feedstock_root/build_artifacts/alembic_1727122811080/work
+alembic==1.13.3
 anyio @ file:///home/conda/feedstock_root/build_artifacts/anyio_1708355285029/work
 bcrypt==4.1.2
 blinker @ file:///home/conda/feedstock_root/build_artifacts/blinker_1698890160476/work
