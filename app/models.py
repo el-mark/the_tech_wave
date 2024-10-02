@@ -3,7 +3,7 @@ import sqlalchemy as sa
 import sqlalchemy.orm as so
 from app import db
 
-class Post(db.Model):
+class Article(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     title: so.Mapped[str] = so.mapped_column(
         sa.String(64), unique=True
@@ -13,4 +13,4 @@ class Post(db.Model):
     views: so.Mapped[int] = so.mapped_column(sa.Integer, default=0)
 
     def __repr__(self):
-        return '<Post {}>'.format(self.title)
+        return '<Article {}>'.format(self.title)

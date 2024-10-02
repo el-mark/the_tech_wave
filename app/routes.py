@@ -1,25 +1,27 @@
 from flask import render_template
 from app import app
+from app.posts import posts  # Import the posts variable
 
 @app.route('/')
 @app.route('/index')
 def index():
-    posts = [
-        {
-            'title': 'Beautiful day in Portland!'
-        },
-        {
-            'title': 'The Avengers movie was so cool!'
-        },
-        {
-            'title': 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-        },
-        {
-            'title': 'Instagram Implementa Restricciones para Proteger a Adolescentes en la Plataforma'
-        },
-        {
-            'title': 'Apple lanza el Watch Series 10 con detección de apnea de sueño y profundidad de agua, y el iPhone 16 se lanza sin su funcionalidad más esperada de IA'
-        }
-
-    ]
     return render_template('index.html', title='Home', posts=posts)
+
+
+@app.route('/article/<int:id>')
+def article(id):
+    # # Fetch the article from the database using the id
+    # post = Post.query.get_or_404(id)
+    
+    # # Increment the view count
+    # post.views += 1
+    # db.session.commit()
+    # Select the post based on the id
+    if 1 <= id <= len(posts):
+        post = posts[id - 1]
+    else:
+        # Handle case where id is out of range
+        post = {'title': 'Article not found'}
+    
+    return render_template('article.html', title=post['title'], post=post, posts=posts)
+
