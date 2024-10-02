@@ -1,0 +1,42 @@
+alembic @ file:///home/conda/feedstock_root/build_artifacts/alembic_1727122811080/work
+anyio @ file:///home/conda/feedstock_root/build_artifacts/anyio_1708355285029/work
+bcrypt==4.1.2
+blinker @ file:///home/conda/feedstock_root/build_artifacts/blinker_1698890160476/work
+certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1725278078093/work/certifi
+cffi @ file:///Users/runner/miniforge3/conda-bld/cffi_1696001825047/work
+click @ file:///home/conda/feedstock_root/build_artifacts/click_1692311806742/work
+cryptography @ file:///Users/runner/miniforge3/conda-bld/cryptography-split_1708507108590/work
+dnspython @ file:///home/conda/feedstock_root/build_artifacts/dnspython_1691598144738/work
+email-validator @ file:///home/conda/feedstock_root/build_artifacts/email-validator-meta_1698062335024/work
+exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1704921103267/work
+Flask @ file:///home/conda/feedstock_root/build_artifacts/flask_1707043907952/work
+Flask-Bcrypt==1.0.1
+Flask-Login==0.6.3
+Flask-Migrate @ file:///home/conda/feedstock_root/build_artifacts/flask-migrate_1710203994795/work
+Flask-SQLAlchemy @ file:///home/conda/feedstock_root/build_artifacts/flask-sqlalchemy_1719325630281/work
+Flask-WTF @ file:///home/conda/feedstock_root/build_artifacts/flask-wtf_1697216059914/work
+greenlet @ file:///Users/runner/miniforge3/conda-bld/greenlet_1703201714305/work
+gunicorn==23.0.0
+h11 @ file:///home/conda/feedstock_root/build_artifacts/h11_1664132893548/work
+h2 @ file:///home/conda/feedstock_root/build_artifacts/h2_1634280454336/work
+hpack==4.0.0
+httpcore @ file:///home/conda/feedstock_root/build_artifacts/httpcore_1708529260247/work
+hyperframe @ file:///home/conda/feedstock_root/build_artifacts/hyperframe_1619110129307/work
+idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1701026962277/work
+importlib-metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1703269254275/work
+importlib_resources @ file:///home/conda/feedstock_root/build_artifacts/importlib_resources_1725921340658/work
+itsdangerous @ file:///home/conda/feedstock_root/build_artifacts/itsdangerous_1648147185463/work
+Jinja2 @ file:///home/conda/feedstock_root/build_artifacts/jinja2_1704966972576/work
+Mako @ file:///home/conda/feedstock_root/build_artifacts/mako_1715711344987/work
+MarkupSafe @ file:///Users/runner/miniforge3/conda-bld/markupsafe_1706900163039/work
+packaging==24.1
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+python-dotenv==1.0.1
+setuptools==69.1.1
+sniffio @ file:///home/conda/feedstock_root/build_artifacts/sniffio_1662051266223/work
+SQLAlchemy @ file:///Users/runner/miniforge3/conda-bld/sqlalchemy_1707848963596/work
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1702176139754/work
+Werkzeug @ file:///home/conda/feedstock_root/build_artifacts/werkzeug_1698235201373/work
+wheel==0.42.0
+WTForms==3.0.1
+zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1695255097490/work
