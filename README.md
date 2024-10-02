@@ -1,9 +1,12 @@
 # The Tech Wave
+## activate environment
+source venv/bin/activate
+
+<!-- ## conda environment
+conda activate flaskProject -->
+
 ## run flask
 flask --debug run
-
-## conda environment
-conda activate flaskProject
 
 ## flush sockets
 when: Access to 127.0.0.1 was denied
