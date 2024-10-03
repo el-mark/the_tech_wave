@@ -16,12 +16,14 @@ if os.environ.get('FLASK_ENV') == 'production':
             'https://cdn.jsdelivr.net',
             "'unsafe-inline'",  # Allow inline styles
             "'sha256-6Q5F2pMp/C1Og2TFlm4KzLyq/tDZsPkvIu9Od1sj7HQ='",  # Specific hash if applicable
-            "'unsafe-hashes'"  # Allow the use of hashes for inline styles
+            "'unsafe-hashes'",
+            "https://www.google-analytics.com"
         ],
         'script-src': [
             "'self'", 'https://cdn.jsdelivr.net', 'https://www.googletagmanager.com',"'sha256-KZMiy1Q3T0ILCRXdaWG0niQoK89rZuJyry8S6ohvMbY='"
         ],
-        'img-src': ["'self'", 'data:'],  # Allow 'self' and 'data:' for images
+        'img-src': ["'self'", 'data:', "https://www.google-analytics.com"],
+        'connect-src': ["'self'", "https://www.google-analytics.com"],
     }
 
     # Apply the custom CSP using Flask-Talisman
