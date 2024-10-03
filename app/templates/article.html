@@ -8,11 +8,9 @@
                     <h2 class="display-5" style="font-weight: 800; font-family: aktiv-grotesk, Helvetica Neue, Helvetica, Arial, sans-serif; margin-top: 1.5rem;">{{ post.title }}</h2>
                     <!-- <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p> -->
                     <img src="{{ post.thumbnail }}" class="bd-placeholder-img card-img-top mb-4 mt-4" width="100%" height="100%" alt="{{ post.title }}">
-                    <p class="text-muted" style="font-size: 0.9rem;">{{ post.date }}</p>
+                    <p class="text-muted" style="font-size: 0.9rem;"><a href="{{ post.source }}" target="_blank">{{ post.source_name }}</a> - {{ post.date }}</p>
         
                     {{ post.body|safe }}
-                    
-                    <p><a href="{{ post.source }}" target="_blank">Fuente</a></p>
                 </article>
             </div>
         </div>
@@ -31,6 +29,7 @@
                                     <img src="{{ post.thumbnail }}" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="{{ post.title }}">
                                     <div class="card-body">
                                         <p class="card-text">{{ post.title }}</p>
+                                        <p class="text-muted" style="font-size: 0.9rem;"><a href="{{ post.source }}" target="_blank">{{ post.source_name }}</a> - {{ post.date }}</p>
                                         <!-- <small class="text-body-secondary">9 vistas</small> -->
                                     </div>
                                 </a>
