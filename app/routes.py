@@ -11,7 +11,7 @@ from app.posts import posts  # Import the posts variable
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home', posts=posts)
+    return render_template('index.html', posts=posts)
 
 
 @app.route('/article/<int:id>')
