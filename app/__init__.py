@@ -11,8 +11,16 @@ app = Flask(__name__, static_folder='assets')
 if os.environ.get('FLASK_ENV') == 'production':
     csp = {
         'default-src': ["'self'"],
-        'style-src': ["'self'", 'https://cdn.jsdelivr.net'],
-        'script-src': ["'self'", 'https://cdn.jsdelivr.net', 'https://www.googletagmanager.com'],
+        'style-src': [
+            "'self'",
+            'https://cdn.jsdelivr.net',
+            "'unsafe-inline'",  # Allow inline styles
+            "'sha256-6Q5F2pMp/C1Og2TFlm4KzLyq/tDZsPkvIu9Od1sj7HQ='",  # Specific hash if applicable
+            "'unsafe-hashes'"  # Allow the use of hashes for inline styles
+        ],
+        'script-src': [
+            "'self'", 'https://cdn.jsdelivr.net', 'https://www.googletagmanager.com',"'sha256-KZMiy1Q3T0ILCRXdaWG0niQoK89rZuJyry8S6ohvMbY='"
+        ],
         'img-src': ["'self'", 'data:'],  # Allow 'self' and 'data:' for images
     }
 
