@@ -12,7 +12,8 @@ if os.environ.get('FLASK_ENV') == 'production':
     csp = {
         'default-src': ["'self'"],
         'style-src': ["'self'", 'https://cdn.jsdelivr.net'],
-        'script-src': ["'self'", 'https://cdn.jsdelivr.net'],
+        'script-src': ["'self'", 'https://cdn.jsdelivr.net', 'https://www.googletagmanager.com'],
+        'img-src': ["'self'", 'data:'],  # Allow 'self' and 'data:' for images
     }
 
     # Apply the custom CSP using Flask-Talisman
