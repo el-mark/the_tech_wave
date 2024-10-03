@@ -14,9 +14,9 @@ if os.environ.get('FLASK_ENV') == 'production':
         'style-src': [
             "'self'",
             'https://cdn.jsdelivr.net',
-            "'unsafe-inline'",  # Allow inline styles
-            "'sha256-6Q5F2pMp/C1Og2TFlm4KzLyq/tDZsPkvIu9Od1sj7HQ='",  # Specific hash if applicable
-            "'unsafe-hashes'",
+            "unsafe-inline",  # Allow inline styles
+            # "'sha256-6Q5F2pMp/C1Og2TFlm4KzLyq/tDZsPkvIu9Od1sj7HQ='",  # Specific hash if applicable
+            "unsafe-hashes",
             "https://www.google-analytics.com"
         ],
         'script-src': [
