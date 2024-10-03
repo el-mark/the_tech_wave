@@ -27,6 +27,6 @@ if os.environ.get('FLASK_ENV') == 'production':
     # # Apply the custom CSP using Flask-Talisman
     # Talisman(app, content_security_policy=csp)
 
-    Talisman = Talisman(force_https=True)
+    Talisman(app, force_https=True)
 
 from app import routes
