@@ -10,9 +10,8 @@ run flask
 
 `flask --debug run`
 
-New libraries
-
-`pip freeze > requirements.txt`
+## New libraries
+pip freeze > requirements.txt
 
 Data base local
 
