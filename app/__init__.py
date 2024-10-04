@@ -32,7 +32,7 @@ if os.environ.get('FLASK_ENV') == 'production':
 
     # Talisman(app, force_https=True)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.environ.get('POSTGRES_USER')}:{os.environ.get('POSTGRES_PASSWORD')}@localhost/{os.environ.get('POSTGRES_DATABASE')}"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the SQLAlchemy object
