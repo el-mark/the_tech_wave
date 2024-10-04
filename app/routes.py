@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect
 from app import app
 from app.posts import posts  # Import the posts variable
+from app.models import Article  # Import Article from models
 
 
 # @app.before_request
@@ -30,4 +31,9 @@ def article(id):
         post = {'title': 'Article not found'}
     
     return render_template('article.html', title=post['title'], post=post, posts=posts)
+
+@app.route('/articles')
+def articles():
+    articles = Article.query.all()
+    return '<br>'.join([str(article) for article in articles])
 

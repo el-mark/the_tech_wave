@@ -16,3 +16,9 @@ chrome://net-internals/#sockets
 
 ## Theoretical basis
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ii-templates
+
+## New libraries
+pip freeze > requirements.txt
+
+## Data base local
+psql -h localhost -p 5432
