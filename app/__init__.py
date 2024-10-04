@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_talisman import Talisman
 import os
-# from config import Config
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__, static_folder='assets')
 # app.config.from_object(Config)
@@ -32,11 +32,11 @@ if os.environ.get('FLASK_ENV') == 'production':
 
     # Talisman(app, force_https=True)
 
-# Configure the PostgreSQL database URI
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://markharmsen:a@localhost/the_tech_wave'
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.environ.get('POSTGRES_USER')}:{os.environ.get('POSTGRES_PASSWORD')}@localhost/the_tech_wave"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the SQLAlchemy object
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 from app import routes

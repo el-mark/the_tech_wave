@@ -35,5 +35,5 @@ def article(id):
 @app.route('/articles')
 def articles():
     articles = Article.query.all()
-    return '<br>'.join([str(article) for article in articles])
+    return '<br>'.join([article.title for article in articles])
 
