@@ -15,3 +15,15 @@ class Article(db.Model):
 
     def __repr__(self):
         return '<Article {}: {}>'.format(self.id, self.title)
+
+    def formatted_date(self):
+        month_translations = {
+            'January': 'enero', 'February': 'febrero', 'March': 'marzo',
+            'April': 'abril', 'May': 'mayo', 'June': 'junio',
+            'July': 'julio', 'August': 'agosto', 'September': 'septiembre',
+            'October': 'octubre', 'November': 'noviembre', 'December': 'diciembre'
+        }
+        date_with_format = self.created_at.strftime('%d de %B de %Y')
+        for eng, esp in month_translations.items():
+            date_with_format = date_with_format.replace(eng, esp)
+        return date_with_format

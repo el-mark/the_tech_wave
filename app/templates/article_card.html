@@ -1,0 +1,13 @@
+<!-- app/templates/article_card.html -->
+<div class="col">
+    <div class="card shadow-sm">
+        <a href="{{ url_for('article', id=article.id) }}" style="text-decoration: none; color: inherit;">
+            <img src="{{ article.image_url }}" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="{{ article.title }}">
+            <div class="card-body">
+                <p class="card-text">{{ article.title }}</p>
+                <p class="text-muted" style="font-size: 0.9rem;"><a href="{{ article.source }}" target="_blank">{{ article.source_name }}</a> - {{ article.formatted_date() }}</p>
+                <!-- <small class="text-body-secondary">9 vistas</small> -->
+            </div>
+        </a>
+    </div>
+</div>

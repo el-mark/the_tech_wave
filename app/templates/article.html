@@ -5,12 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-7">
                 <article class="blog-post">
-                    <h2 class="display-5" style="font-weight: 800; font-family: aktiv-grotesk, Helvetica Neue, Helvetica, Arial, sans-serif; margin-top: 1.5rem;">{{ post.title }}</h2>
+                    <h2 class="display-5" style="font-weight: 800; font-family: aktiv-grotesk, Helvetica Neue, Helvetica, Arial, sans-serif; margin-top: 1.5rem;">{{ article.title }}</h2>
                     <!-- <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p> -->
-                    <img src="{{ post.thumbnail }}" class="bd-placeholder-img card-img-top mb-4 mt-4" width="100%" height="100%" alt="{{ post.title }}">
-                    <p class="text-muted" style="font-size: 0.9rem;"><a href="{{ post.source }}" target="_blank">{{ post.source_name }}</a> - {{ post.date }}</p>
+                    <img src="{{ article.image_url }}" class="bd-placeholder-img card-img-top mb-4 mt-4" width="100%" height="100%" alt="{{ article.title }}">
+                    <p class="text-muted" style="font-size: 0.9rem;"><a href="{{ article.source }}" target="_blank">{{ article.source_name }}</a> - {{ article.formatted_date() }}</p>
         
-                    {{ post.body|safe }}
+                    {{ article.body|safe }}
                 </article>
             </div>
         </div>
@@ -22,19 +22,8 @@
             <div class="col-md-7">
                 <div class="row row-cols-1 row-cols-sm-2 g-3 mt-3">
 
-                    {% for post in posts %}
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                <a href="{{ url_for('article', id=loop.index) }}" style="text-decoration: none; color: inherit;">
-                                    <img src="{{ post.thumbnail }}" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="{{ post.title }}">
-                                    <div class="card-body">
-                                        <p class="card-text">{{ post.title }}</p>
-                                        <p class="text-muted" style="font-size: 0.9rem;"><a href="{{ post.source }}" target="_blank">{{ post.source_name }}</a> - {{ post.date }}</p>
-                                        <!-- <small class="text-body-secondary">9 vistas</small> -->
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                    {% for article in articles %}
+                        {% include 'article_card.html' %}
                     {% endfor %}
 
                 </div>

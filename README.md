@@ -1,14 +1,13 @@
 # The Tech Wave
 ## Commands
-activate environment
+### activate environment
 source venv/bin/activate
 
 <!-- ## conda environment
 conda activate flaskProject -->
 
-run flask
-
-`flask --debug run`
+### run flask
+flask --debug run
 
 ## New libraries
 pip freeze > requirements.txt
