@@ -6,7 +6,7 @@
             <div class="card-body">
                 <p class="card-text">{{ article.title }}</p>
                 <p class="text-muted" style="font-size: 0.9rem;">
-                    <span><a href="{{ article.source }}" target="_blank">{{ article.source_name }}</a> - {{ article.formatted_date() }}</span>
+                    <span><strong>{{ article.source_name }}</strong> - {{ article.formatted_date() }}</span>
                     <span style="float: right;">{{ article.views }} vistas</span>
                 </p>
             </div>
