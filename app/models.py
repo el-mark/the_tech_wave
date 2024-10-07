@@ -12,6 +12,7 @@ class Article(db.Model):
     source: so.Mapped[Optional[str]] = so.mapped_column(sa.String(510))
     source_name: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
     created_at: so.Mapped[date] = so.mapped_column(sa.Date, default=date.today)
+    views: so.Mapped[int] = so.mapped_column(sa.Integer, default=0)
 
     def __repr__(self):
         return '<Article {}: {}>'.format(self.id, self.title)
@@ -23,7 +24,8 @@ class Article(db.Model):
             'July': 'julio', 'August': 'agosto', 'September': 'septiembre',
             'October': 'octubre', 'November': 'noviembre', 'December': 'diciembre'
         }
-        date_with_format = self.created_at.strftime('%d de %B de %Y')
+        # date_with_format = self.created_at.strftime('%d de %B de %Y')
+        date_with_format = self.created_at.strftime('%d de %B')
         for eng, esp in month_translations.items():
             date_with_format = date_with_format.replace(eng, esp)
         return date_with_format
