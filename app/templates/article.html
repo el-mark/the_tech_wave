@@ -27,7 +27,7 @@
                         {% for comment in article.comments %}
                         <div class="card mb-2" style="background-color: #F0F2F5; border: none;">
                             <div class="card-body">
-                                <p style="margin: 0;"><strong>{{ comment.user.username }} {{ comment.user.lastname }}</strong></p>
+                                <p style="margin: 0;"><strong>{{ comment.user.name }} {{ comment.user.lastname }}</strong></p>
                                 <p style="margin: 0;">{{ comment.body }}</p>
                             </div>
                         </div>

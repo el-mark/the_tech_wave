@@ -69,18 +69,20 @@ def articles():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        username = request.form['username']
+        name = request.form['name']
+        lastname = request.form['lastname']
         email = request.form['email']
         password = request.form['password']
         if User.query.filter_by(email=email).first():
             flash('Email already registered')
             return redirect(url_for('signup'))
-        user = User(username=username, email=email)
+        user = User(name=name, lastname=lastname, email=email)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
+        login_user(user)
         flash('Signup successful!')
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
     return render_template('signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])

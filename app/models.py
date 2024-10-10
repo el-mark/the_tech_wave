@@ -35,7 +35,7 @@ class Article(db.Model):
 
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    username: so.Mapped[str] = so.mapped_column(sa.String(150), unique=True, nullable=False)
+    name: so.Mapped[str] = so.mapped_column(sa.String(150), nullable=False)
     email: so.Mapped[str] = so.mapped_column(sa.String(150), unique=True, nullable=False)
     lastname: so.Mapped[str] = so.mapped_column(sa.String(150), nullable=True) 
     password_hash: so.Mapped[str] = so.mapped_column(sa.String(255), nullable=False)
@@ -49,7 +49,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<User {}>'.format(self.name)
 
     @property
     def is_active(self):

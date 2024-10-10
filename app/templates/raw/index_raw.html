@@ -2,7 +2,7 @@
 
 {% block content %}
     {% for post in posts %}
-        <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+        <div><p>{{ post.author.name }} says: <b>{{ post.body }}</b></p></div>
     {% endfor %}
 
 
