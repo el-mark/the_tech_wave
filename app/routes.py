@@ -1,7 +1,8 @@
 from flask import render_template, request, redirect, make_response, flash, url_for
 from app import app, db
-from app.models import Article, User  # Import Article and User from models
+from app.models import Article, User, Comment
 from flask_login import login_user, logout_user, login_required, current_user
+from datetime import datetime
 
 # @app.before_request
 # def enforce_https():
@@ -39,6 +40,27 @@ def article(id):
     
     return response
 
+@app.route('/article/<int:id>/comment', methods=['POST'])
+@login_required
+def post_comment(id):
+    article = Article.query.get_or_404(id)
+    
+    # Get the comment body from the form
+    body = request.form['body']
+    
+    # Create a new comment
+    comment = Comment(
+        body=body, user_id=current_user.id, article_id=article.id,
+        created_at=datetime.utcnow()
+    )
+    
+    # Add the comment to the database
+    db.session.add(comment)
+    db.session.commit()
+    
+    flash('Comment posted successfully!')
+    return redirect(url_for('article', id=article.id))
+
 @app.route('/articles')
 def articles():
     articles = Article.query.all()
@@ -47,18 +69,20 @@ def articles():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        username = request.form['username']
+        name = request.form['name']
+        lastname = request.form['lastname']
         email = request.form['email']
         password = request.form['password']
         if User.query.filter_by(email=email).first():
             flash('Email already registered')
             return redirect(url_for('signup'))
-        user = User(username=username, email=email)
+        user = User(name=name, lastname=lastname, email=email)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
+        login_user(user)
         flash('Signup successful!')
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
     return render_template('signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])

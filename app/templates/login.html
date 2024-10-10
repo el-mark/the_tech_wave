@@ -5,11 +5,12 @@
     <main class="form-signin w-100 m-auto">
         <form method="post">
 
-            <a href="{{ url_for('index') }}">
-                <img src="/assets/images/logo.png" alt="The Tech Wave Logo" width="72" height="72" class="me-2 mb-4">
-            </a>
-            
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <div class="text-center">
+                <a href="{{ url_for('index') }}">
+                    <img src="/assets/images/logo.png" alt="The Tech Wave Logo" width="72" height="72" class="mb-4">
+                </a>
+            </div>
+            <h1 class="h3 mb-3 fw-normal text-center">Iniciar sesión</h1>
         
             <div class="form-floating">
                 <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
@@ -27,6 +28,9 @@
                 </label>
             </div>
             <button class="btn btn-primary w-100 py-2" type="submit">Iniciar Sesión</button>
+            <p class="text-center mt-3">
+                ¿No tienes una cuenta? <a href="{{ url_for('signup') }}">Regístrate aquí</a>
+            </p>
             <p class="mt-5 mb-3 text-body-secondary">&copy; 2024 The Tech Wave</p>
         </form>
     </main>
