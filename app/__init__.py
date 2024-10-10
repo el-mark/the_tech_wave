@@ -3,6 +3,7 @@ from flask_talisman import Talisman
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 app = Flask(__name__, static_folder='assets')
 # app.config.from_object(Config)
@@ -43,5 +44,18 @@ app.config['SECRET_KEY'] = os.environ.get('DATABASE_URL')
 # Initialize the SQLAlchemy object
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+# Create a LoginManager instance
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+# Configure the LoginManager (optional)
+# login_manager.login_view = 'login'
+
+from app.models import User
+# Define a user loader function
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 from app import routes

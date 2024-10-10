@@ -80,3 +80,8 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+@app.route('/user')
+@login_required
+def user():
+    return {'email': current_user.email, 'id': current_user.id}
