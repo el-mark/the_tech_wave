@@ -1,6 +1,7 @@
-from flask import render_template, request, redirect, make_response
+from flask import render_template, request, redirect, make_response, flash, url_for
 from app import app, db
-from app.models import Article  # Import Article from models
+from app.models import Article, User  # Import Article and User from models
+from flask_login import login_user, logout_user, login_required, current_user
 
 # @app.before_request
 # def enforce_https():
@@ -42,3 +43,33 @@ def article(id):
 def articles():
     articles = Article.query.all()
     return '<br>'.join([article.title for article in articles])
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        if User.query.filter_by(email=email).first():
+            flash('Email already registered')
+            return redirect(url_for('signup'))
+        user = User(username=username, email=email)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        flash('Signup successful!')
+        return redirect(url_for('login'))
+    return render_template('signup.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = User.query.filter_by(email=email).first()
+        if user is None or not user.check_password(password):
+            flash('Invalid email or password')
+            return redirect(url_for('login'))
+        flash('Login successful!')
+        return redirect(url_for('index'))
+    return render_template('login.html')
