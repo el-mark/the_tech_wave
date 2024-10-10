@@ -56,11 +56,27 @@
                             <p class="text-body-secondary">Un lugar donde encuentras noticias de tecnología y empresas, historias que están dando forma a latinoamérica y el mundo. Desde startups innovadoras hasta gigantes de la industria, encuentra las noticias más relevantes. Súbete a la ola tecnológica y no te quedes atrás.</p>
                         </div>
                         <div class="col-sm-4 offset-md-1 py-4">
-                            <h4>Contacto</h4>
-                            <ul class="list-unstyled">
-                                <!-- <li><a href="#" class="text-white">Follow on Twitter</a></li> -->
-                                <li><a href="#" class="text-white">mharmsenr@gmail.com</a></li>
-                            </ul>
+                            <div class="d-none d-md-block">
+                                <h4>Contacto</h4>
+                                <ul class="list-unstyled">
+                                    <!-- <li><a href="#" class="text-white">Follow on Twitter</a></li> -->
+                                    <li><a href="#" class="text-white">mharmsenr@gmail.com</a></li>
+                                </ul>
+                            </div>
+                            <div class="d-block d-md-none">
+                                <h4>Menú</h4>
+                                <ul class="list-unstyled">
+
+                                    {% if current_user.is_authenticated %}
+                                        <li class="mb-3"><a href="{{ url_for('logout') }}" class="text-white underline-on-hover">Cerrar Sesión</a></li>
+                                    {% else %}
+                                        <li class="mb-3"><a href="{{ url_for('login') }}" class="text-white underline-on-hover">Iniciar Sesión</a></li>
+                                        <li><a href="{{ url_for('signup') }}" class="text-white underline-on-hover">Registrarse</a></li>
+                                    {% endif %}
+
+
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,12 +92,33 @@
                         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="The Tech Wave Logo" width="20" height="20" class="me-2">
                         <strong>The Tech Wave</strong>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                    <div class="d-flex align-items-center">
+                        <div class="d-none d-md-flex align-items-center">
+                            {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('logout') }}" class="me-3 text-white underline-on-hover">Cerrar Sesión</a>
+                            {% else %}
+                                <a href="{{ url_for('login') }}" class="me-3 text-white underline-on-hover">Iniciar Sesión</a>
+                                <a href="{{ url_for('signup') }}" class="me-3 text-white underline-on-hover">Registrarse</a>
+                            {% endif %}
+                        </div>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
+
+        <!-- Flash messages section -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-5" style="z-index: 1050;" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
     
         <main>
             
