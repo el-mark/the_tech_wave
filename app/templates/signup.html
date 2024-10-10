@@ -5,11 +5,13 @@
     <main class="form-signin w-100 m-auto">
         <form method="post">
 
-            <a href="{{ url_for('index') }}">
-                <img src="/assets/images/logo.png" alt="The Tech Wave Logo" width="72" height="72" class="me-2 mb-4">
-            </a>
-            
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <div class="text-center">
+                <a href="{{ url_for('index') }}">
+                    <img src="/assets/images/logo.png" alt="The Tech Wave Logo" width="72" height="72" class="me-2 mb-4">
+                </a>
+            </div>
+
+            <h1 class="h3 mb-3 fw-normal text-center">Registrarse</h1>
         
             <div class="form-floating">
                 <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="Nombre de Usuario" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0; margin-bottom: -1px;" required>

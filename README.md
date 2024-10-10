@@ -32,7 +32,7 @@ flask db migrate -m "Create article table"
 
 Apply the Migration: Apply the migration to your database to create the table:
 
-flask db upgrade
+s
 
 ## flask shell
 flask shell
