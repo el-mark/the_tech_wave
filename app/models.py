@@ -4,6 +4,7 @@ import sqlalchemy.orm as so
 from app import db
 from datetime import date 
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 class Article(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
@@ -31,11 +32,12 @@ class Article(db.Model):
             date_with_format = date_with_format.replace(eng, esp)
         return date_with_format
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(150), unique=True, nullable=False)
     email: so.Mapped[str] = so.mapped_column(sa.String(150), unique=True, nullable=False)
-    password_hash: so.Mapped[str] = so.mapped_column(sa.String(128), nullable=False)
+    password_hash: so.Mapped[str] = so.mapped_column(sa.String(255), nullable=False)  # Increased length
+    is_admin: so.Mapped[bool] = so.mapped_column(sa.Boolean, default=False, nullable=False)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -45,3 +47,8 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    @property
+    def is_active(self):
+        # Return True if the user is active, otherwise False
+        return True  # or some condition to check if the user is active

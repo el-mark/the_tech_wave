@@ -38,6 +38,7 @@ if database_url and database_url.startswith('postgres://'):
 
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.environ.get('DATABASE_URL')
 
 # Initialize the SQLAlchemy object
 db = SQLAlchemy(app)

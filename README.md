@@ -28,8 +28,11 @@ https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ii-templates
 ## Migrations
 Generate Migration Script: Create a migration script that will generate the SQL to create the Article table:
 
-`flask db migrate -m "Create article table"`
+flask db migrate -m "Create article table"
 
 Apply the Migration: Apply the migration to your database to create the table:
 
-`flask db upgrade`
+flask db upgrade
+
+## flask shell
+flask shell

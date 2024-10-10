@@ -70,6 +70,13 @@ def login():
         if user is None or not user.check_password(password):
             flash('Invalid email or password')
             return redirect(url_for('login'))
+        login_user(user)
         flash('Login successful!')
         return redirect(url_for('index'))
     return render_template('login.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
