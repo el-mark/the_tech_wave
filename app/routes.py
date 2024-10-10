@@ -68,10 +68,10 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(email=email).first()
         if user is None or not user.check_password(password):
-            flash('Invalid email or password')
+            flash('El correo y/o la contraseña son incorrectos.')
             return redirect(url_for('login'))
         login_user(user)
-        flash('Login successful!')
+        flash('Sesión iniciada!')
         return redirect(url_for('index'))
     return render_template('login.html')
 
@@ -79,7 +79,8 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    flash('Sesión cerrada correctamente!')
+    return redirect(url_for('index'))
 
 @app.route('/user')
 @login_required

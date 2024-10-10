@@ -115,6 +115,16 @@
             </symbol>
         </svg>
 
+        <!-- Flash messages section -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-danger position-fixed top-0 start-50 translate-middle-x mt-5" style="z-index: 1050;" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
 
         {% block content %}{% endblock %}
 
