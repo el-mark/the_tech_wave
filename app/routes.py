@@ -85,3 +85,30 @@ def logout():
 @login_required
 def user():
     return {'email': current_user.email, 'id': current_user.id}
+
+@app.route('/create_article', methods=['GET', 'POST'])
+@login_required
+def create_article():
+    if not current_user.is_admin:
+        flash('You do not have permission to access this page.')
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['body']
+        image_url = request.form['image_url']
+        source = request.form['source']
+        source_name = request.form['source_name']
+        created_at = request.form['created_at']
+
+        article = Article(
+            title=title, body=body, image_url=image_url,
+            source=source, source_name=source_name, created_at=created_at
+        )
+
+        db.session.add(article)
+        db.session.commit()
+        flash('Article created successfully!')
+        return redirect(url_for('index'))
+    
+    return render_template('create_article.html')
