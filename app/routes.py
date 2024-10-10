@@ -29,7 +29,7 @@ def article(id):
         db.session.commit()
     
     # Get other articles for the "More news" section
-    articles = Article.query.order_by(Article.created_at.desc()).all()
+    articles = Article.query.filter(Article.id != id).order_by(Article.created_at.desc()).all()
     
     # Prepare the response
     response = make_response(render_template('article.html', title=article.title, article=article, articles=articles))
