@@ -36,6 +36,7 @@ class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(150), unique=True, nullable=False)
     email: so.Mapped[str] = so.mapped_column(sa.String(150), unique=True, nullable=False)
+    lastname: so.Mapped[str] = so.mapped_column(sa.String(150), nullable=True)  # New field added
     password_hash: so.Mapped[str] = so.mapped_column(sa.String(255), nullable=False)  # Increased length
     is_admin: so.Mapped[bool] = so.mapped_column(sa.Boolean, default=False, nullable=False)
 
