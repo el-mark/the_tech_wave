@@ -1,4 +1,6 @@
 # The Tech Wave
+See the website here [https://www.thetechwave.lat/](https://www.thetechwave.lat/)
+
 ## Commands
 ### activate environment
 source venv/bin/activate
