@@ -3,6 +3,7 @@ from app import app, db
 from app.models import Article, User, Comment
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import datetime
+import os
 
 # @app.before_request
 # def enforce_https():
@@ -13,7 +14,7 @@ from datetime import datetime
 @app.route('/index')
 def index():
     articles = Article.query.order_by(Article.created_at.desc()).all()
-    return render_template('index.html', articles=articles)
+    return render_template('index.html', os=os, articles=articles)
 
 @app.route('/article/<int:id>')
 def article(id):
@@ -32,7 +33,7 @@ def article(id):
     articles = Article.query.filter(Article.id != id).order_by(Article.created_at.desc()).all()
     
     # Prepare the response
-    response = make_response(render_template('article.html', title=article.title, article=article, articles=articles))
+    response = make_response(render_template('article.html', os=os, title=article.title, article=article, articles=articles))
     
     if not viewed:
         # Set a cookie to mark this article as viewed by this user
@@ -83,7 +84,7 @@ def signup():
         login_user(user)
         flash('Signup successful!')
         return redirect(url_for('index'))
-    return render_template('signup.html')
+    return render_template('signup.html', os=os)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -97,7 +98,7 @@ def login():
         login_user(user)
         flash('Sesión iniciada!')
         return redirect(url_for('index'))
-    return render_template('login.html')
+    return render_template('login.html', os=os)
 
 @app.route('/logout')
 @login_required
@@ -136,4 +137,4 @@ def create_article():
         flash('Article created successfully!')
         return redirect(url_for('index'))
     
-    return render_template('create_article.html')
+    return render_template('create_article.html', os=os)
