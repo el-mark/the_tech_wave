@@ -22,8 +22,8 @@ if os.environ.get('FLASK_ENV') == 'production':
         #     "https://www.google-analytics.com"
         # ],
         'script-src': [
-            "'self'", 'https://cdn.jsdelivr.net', 'https://www.googletagmanager.com',"'sha256-KZMiy1Q3T0ILCRXdaWG0niQoK89rZuJyry8S6ohvMbY='",
-            'unsafe-inline'
+            "'self'", 'https://cdn.jsdelivr.net', 'https://www.googletagmanager.com',
+            "'unsafe-inline'"
         ],
         'img-src': ["'self'", 'data:', "https://www.google-analytics.com"],
         'connect-src': ["'self'", "https://www.google-analytics.com"],
