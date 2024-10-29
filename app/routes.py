@@ -1,13 +1,34 @@
-from flask import render_template, request, redirect, make_response, flash, url_for
+from flask import render_template, request, redirect, make_response, flash, url_for, jsonify
 from app import app, db
 from app.models import Article, User, Comment
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import datetime
+from flask_googlestorage import GoogleStorage, Bucket
 
 # @app.before_request
 # def enforce_https():
 #     if request.headers.get('X-Forwarded-Proto', 'http') == 'http':
 #         return redirect(request.url.replace('http://', 'https://'))
+
+
+@app.route('/upload_file', methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        files = Bucket("files")
+
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'}), 400
+        
+        file_storage = request.files['file']
+        if file_storage.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
+
+        filename = files.save(file_storage)  # Save the file
+        public_url = files.url(filename)  # Get the public URL
+
+        return jsonify({'url': public_url}), 200
+    else:
+        return render_template('upload_file.html')
 
 @app.route('/')
 @app.route('/index')

@@ -4,10 +4,14 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from datetime import timedelta
+from flask_googlestorage import GoogleStorage, Bucket
+
 
 app = Flask(__name__, static_folder='assets')
 # app.config.from_object(Config)
 # db = SQLAlchemy(app)
+
 
 if os.environ.get('FLASK_ENV') == 'production':
     csp = {
@@ -51,6 +55,16 @@ login_manager.init_app(app)
 
 # Configure the LoginManager (optional)
 # login_manager.login_view = 'login'
+
+# Google Storage
+files = Bucket("files")
+storage = GoogleStorage(files)
+app.config.update(
+    GOOGLE_STORAGE_LOCAL_DEST=app.instance_path,
+    GOOGLE_STORAGE_SIGNATURE={"expiration": timedelta(minutes=5)},
+    GOOGLE_STORAGE_FILES_BUCKET="articles_images"
+)
+storage.init_app(app)
 
 from app.models import User
 # Define a user loader function
