@@ -10,10 +10,14 @@ import os
 # def enforce_https():
 #     if request.headers.get('X-Forwarded-Proto', 'http') == 'http':
 #         return redirect(request.url.replace('http://', 'https://'))
+    
 
-
-@app.route('/upload_file', methods=['POST'])
+@app.route('/upload_file', methods=['GET', 'POST'])
+@login_required
 def upload_file():
+    if not current_user.is_admin:
+        flash('You do not have permission to access this page.')
+        return redirect(url_for('index'))
     if request.method == 'POST':
         files = Bucket("files")
 
@@ -25,7 +29,7 @@ def upload_file():
             return jsonify({'error': 'No selected file'}), 400
 
         filename = files.save(file_storage)  # Save the file
-        public_url = files.url(filename)  # Get the public URL
+        public_url = files.url(str(filename))  # Get the public URL
 
         return jsonify({'url': public_url}), 200
     else:
