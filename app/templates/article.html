@@ -9,7 +9,14 @@
                     <!-- <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p> -->
                     <img src="{{ article.image_url }}" class="bd-placeholder-img card-img-top mb-4 mt-4" width="100%" height="100%" alt="{{ article.title }}">
                     <p class="text-muted" style="font-size: 0.9rem;">
-                        <span>Fuente: <a href="{{ article.source }}" target="_blank">{{ article.source_name }}</a> - {{ article.formatted_date() }}</span>
+                        <span>
+                            {% if article.source %}
+                                Fuente: <a href="{{ article.source }}" target="_blank">{{ article.source_name }}</a>
+                            {% else %}
+                                Blog: <strong>{{ article.source_name }}</strong>
+                            {% endif %}
+                            - {{ article.formatted_date() }}
+                        </span>
                         <span style="float: right;">{{ article.views }} vistas</span>
                     </p>
         

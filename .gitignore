@@ -1,2 +1,6 @@
 venv/
+<<<<<<< HEAD
 credentials/
+=======
+app/__pycache__
+>>>>>>> main
