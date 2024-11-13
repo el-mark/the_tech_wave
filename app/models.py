@@ -2,15 +2,17 @@ from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from app import db
-from datetime import date 
+from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
 
 class Article(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     title: so.Mapped[str] = so.mapped_column(sa.String(510), unique=True)
     body: so.Mapped[str] = so.mapped_column(sa.Text)
     image_url: so.Mapped[Optional[str]] = so.mapped_column(sa.String(255))
+    storage_file_name: so.Mapped[Optional[str]] = so.mapped_column(sa.String(255))
     source: so.Mapped[Optional[str]] = so.mapped_column(sa.String(510))
     source_name: so.Mapped[Optional[str]] = so.mapped_column(sa.String(64))
     created_at: so.Mapped[date] = so.mapped_column(sa.Date, default=date.today)
@@ -32,6 +34,13 @@ class Article(db.Model):
         for eng, esp in month_translations.items():
             date_with_format = date_with_format.replace(eng, esp)
         return date_with_format
+    
+    def get_image_url(self):
+        if self.image_url:
+            return self.image_url
+        else:
+            return (self.storage_file_name)
+
 
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)

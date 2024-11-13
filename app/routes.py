@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, make_response, flash, url_
 from app import app, db
 from app.models import Article, User, Comment
 from flask_login import login_user, logout_user, login_required, current_user
-from datetime import datetime
+from datetime import datetime, date
 from flask_googlestorage import GoogleStorage, Bucket
 import os
 
@@ -10,30 +10,7 @@ import os
 # def enforce_https():
 #     if request.headers.get('X-Forwarded-Proto', 'http') == 'http':
 #         return redirect(request.url.replace('http://', 'https://'))
-    
 
-@app.route('/upload_file', methods=['GET', 'POST'])
-@login_required
-def upload_file():
-    if not current_user.is_admin:
-        flash('You do not have permission to access this page.')
-        return redirect(url_for('index'))
-    if request.method == 'POST':
-        files = Bucket("files")
-
-        if 'file' not in request.files:
-            return jsonify({'error': 'No file part'}), 400
-        
-        file_storage = request.files['file']
-        if file_storage.filename == '':
-            return jsonify({'error': 'No selected file'}), 400
-
-        filename = files.save(file_storage)  # Save the file
-        public_url = files.url(str(filename))  # Get the public URL
-
-        return jsonify({'url': public_url}), 200
-    else:
-        return render_template('upload_file.html')
 
 @app.route('/')
 @app.route('/index')
@@ -145,16 +122,32 @@ def create_article():
         return redirect(url_for('index'))
     
     if request.method == 'POST':
+        # File management
+        files = Bucket("files")
+        print(request.files)
+        print(request.files['file'])
+
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'}), 400
+        
+        file_storage = request.files['file']
+        if file_storage.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
+
+        filename = files.save(file_storage)  # Save the file
+        public_url = files.url(str(filename))  # Get the public URL
+
+        # The rest of the fields management
         title = request.form['title']
         body = request.form['body']
-        image_url = request.form['image_url']
         source = request.form['source']
         source_name = request.form['source_name']
         created_at = request.form['created_at']
 
         article = Article(
-            title=title, body=body, image_url=image_url,
-            source=source, source_name=source_name, created_at=created_at
+            title=title, body=body,
+            source=source, source_name=source_name, created_at=created_at,
+            storage_file_name=public_url
         )
 
         db.session.add(article)
@@ -162,4 +155,29 @@ def create_article():
         flash('Article created successfully!')
         return redirect(url_for('index'))
     
-    return render_template('create_article.html', os=os)
+    return render_template('create_article.html', os=os, date=date)
+
+
+@app.route('/upload_file', methods=['GET', 'POST'])
+@login_required
+def upload_file():
+    if not current_user.is_admin:
+        flash('You do not have permission to access this page.')
+        return redirect(url_for('index'))
+
+    if request.method == 'POST':
+        files = Bucket("files")
+
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'}), 400
+        
+        file_storage = request.files['file']
+        if file_storage.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
+
+        filename = files.save(file_storage)  # Save the file
+        public_url = files.url(str(filename))  # Get the public URL
+
+        return jsonify({'url': public_url}), 200
+    else:
+        return render_template('upload_file.html')
