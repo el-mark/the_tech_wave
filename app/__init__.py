@@ -29,7 +29,7 @@ if os.environ.get('FLASK_ENV') == 'production':
             "'self'", 'https://cdn.jsdelivr.net', 'https://www.googletagmanager.com',
             "'unsafe-inline'"
         ],
-        'img-src': ["'self'", 'data:', "https://www.google-analytics.com"],
+        'img-src': ["'self'", 'data:', "https://www.google-analytics.com", "https://storage.googleapis.com"],
         'connect-src': ["'self'", "https://www.google-analytics.com"],
     }
 
