@@ -15,8 +15,13 @@ import os
 @app.route('/')
 @app.route('/index')
 def index():
-    articles = Article.query.order_by(Article.created_at.desc()).all()
-    return render_template('index.html', os=os, articles=articles)
+    page = request.args.get('page', 1, type=int)  # Get the page number from the query parameters
+    per_page = 21  # Number of articles per page
+    articles = Article.query.order_by(Article.created_at.desc()).paginate(page=page, per_page=per_page, error_out=False)
+    total_articles = Article.query.count()
+    next_button = total_articles - per_page * page > 0
+    
+    return render_template('index.html', os=os, articles=articles.items, pagination=articles, page=page, next_button=next_button)
 
 @app.route('/article/<int:id>')
 def article(id):
